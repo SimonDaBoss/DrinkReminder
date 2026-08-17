@@ -28,20 +28,24 @@ final class PersistenceController {
             managedObjectModel: ManagedObjectModelFactory.makeModel()
         )
 
-        guard let description = container.persistentStoreDescriptions.first else {
-            throw PersistenceError.storeLoadFailed(
-                NSError(domain: "DrinkReminder.Persistence", code: 1)
-            )
+        let description: NSPersistentStoreDescription
+        if inMemory {
+            description = NSPersistentStoreDescription()
+            description.type = NSInMemoryStoreType
+            description.url = URL(fileURLWithPath: "/dev/null")
+            container.persistentStoreDescriptions = [description]
+        } else {
+            guard let defaultDescription = container.persistentStoreDescriptions.first else {
+                throw PersistenceError.storeLoadFailed(
+                    NSError(domain: "DrinkReminder.Persistence", code: 1)
+                )
+            }
+            description = defaultDescription
         }
 
         description.shouldAddStoreAsynchronously = false
         description.setOption(true as NSNumber, forKey: NSMigratePersistentStoresAutomaticallyOption)
         description.setOption(true as NSNumber, forKey: NSInferMappingModelAutomaticallyOption)
-
-        if inMemory {
-            description.type = NSInMemoryStoreType
-            description.url = nil
-        }
 
         var loadError: Error?
         container.loadPersistentStores { _, error in

@@ -2,8 +2,8 @@ import CoreData
 import XCTest
 @testable import DrinkReminder
 
-@MainActor
 final class PersistenceBootstrapperTests: XCTestCase {
+    @MainActor
     func testBootstrapIsIdempotentAndCreatesRequiredDefaults() throws {
         let persistence = try PersistenceController(inMemory: true)
         let bootstrapper = PersistenceBootstrapper(context: persistence.viewContext)

@@ -2,28 +2,12 @@ import CoreData
 import XCTest
 @testable import DrinkReminder
 
-@MainActor
 final class HydrationTrackingServiceTests: XCTestCase {
-    private var persistence: PersistenceController!
-    private var calendar: Calendar!
-
-    override func setUpWithError() throws {
-        persistence = try PersistenceController(inMemory: true)
-        try PersistenceBootstrapper(context: persistence.viewContext).prepareDefaults()
-
-        var calendar = Calendar(identifier: .gregorian)
-        calendar.timeZone = try XCTUnwrap(TimeZone(identifier: "America/Los_Angeles"))
-        self.calendar = calendar
-    }
-
-    override func tearDown() {
-        persistence = nil
-        calendar = nil
-    }
-
+    @MainActor
     func testLoggingWaterPersistsLogAndUpdatesSummary() throws {
-        try setDailyGoal(2_000)
-        let now = makeDate(year: 2026, month: 8, day: 16, hour: 9)
+        let (persistence, calendar) = try makeFixture()
+        try setDailyGoal(2_000, in: persistence)
+        let now = makeDate(year: 2026, month: 8, day: 16, hour: 9, calendar: calendar)
         let service = HydrationTrackingService(
             context: persistence.viewContext,
             clock: FixedClock(now: now),
@@ -45,9 +29,11 @@ final class HydrationTrackingServiceTests: XCTestCase {
         XCTAssertEqual(logs.first?.source, .quickAdd)
     }
 
+    @MainActor
     func testMilestonesOnlyReportWhenThresholdIsCrossed() throws {
-        try setDailyGoal(1_000)
-        let now = makeDate(year: 2026, month: 8, day: 16, hour: 10)
+        let (persistence, calendar) = try makeFixture()
+        try setDailyGoal(1_000, in: persistence)
+        let now = makeDate(year: 2026, month: 8, day: 16, hour: 10, calendar: calendar)
         let service = HydrationTrackingService(
             context: persistence.viewContext,
             clock: FixedClock(now: now),
@@ -69,9 +55,18 @@ final class HydrationTrackingServiceTests: XCTestCase {
         XCTAssertEqual(fourth.summary.totalML, 1_200, accuracy: 0.001)
     }
 
+    @MainActor
     func testNewDayCreatesSeparateRecordAndPreservesHistory() throws {
-        try setDailyGoal(2_000)
-        let firstDate = makeDate(year: 2026, month: 8, day: 16, hour: 23, minute: 50)
+        let (persistence, calendar) = try makeFixture()
+        try setDailyGoal(2_000, in: persistence)
+        let firstDate = makeDate(
+            year: 2026,
+            month: 8,
+            day: 16,
+            hour: 23,
+            minute: 50,
+            calendar: calendar
+        )
         let firstService = HydrationTrackingService(
             context: persistence.viewContext,
             clock: FixedClock(now: firstDate),
@@ -79,8 +74,15 @@ final class HydrationTrackingServiceTests: XCTestCase {
         )
         _ = try firstService.logWater(volumeML: 1_000, source: .preset)
 
-        try setDailyGoal(2_500)
-        let secondDate = makeDate(year: 2026, month: 8, day: 17, hour: 0, minute: 10)
+        try setDailyGoal(2_500, in: persistence)
+        let secondDate = makeDate(
+            year: 2026,
+            month: 8,
+            day: 17,
+            hour: 0,
+            minute: 10,
+            calendar: calendar
+        )
         let secondService = HydrationTrackingService(
             context: persistence.viewContext,
             clock: FixedClock(now: secondDate),
@@ -99,8 +101,10 @@ final class HydrationTrackingServiceTests: XCTestCase {
         XCTAssertEqual(history.map(\.dayIdentifier), ["2026-08-17", "2026-08-16"])
     }
 
+    @MainActor
     func testRejectsNonPositiveAndNonFiniteVolumes() throws {
-        let now = makeDate(year: 2026, month: 8, day: 16, hour: 12)
+        let (persistence, calendar) = try makeFixture()
+        let now = makeDate(year: 2026, month: 8, day: 16, hour: 12, calendar: calendar)
         let service = HydrationTrackingService(
             context: persistence.viewContext,
             clock: FixedClock(now: now),
@@ -117,19 +121,32 @@ final class HydrationTrackingServiceTests: XCTestCase {
         XCTAssertTrue(try service.recentHistory().isEmpty)
     }
 
-    private func setDailyGoal(_ value: Double) throws {
+    @MainActor
+    private func makeFixture() throws -> (PersistenceController, Calendar) {
+        let persistence = try PersistenceController(inMemory: true)
+        try PersistenceBootstrapper(context: persistence.viewContext).prepareDefaults()
+
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = try XCTUnwrap(TimeZone(identifier: "America/Los_Angeles"))
+        return (persistence, calendar)
+    }
+
+    @MainActor
+    private func setDailyGoal(_ value: Double, in persistence: PersistenceController) throws {
         let request = NSFetchRequest<AppPreferencesEntity>(entityName: "AppPreferencesEntity")
         let preferences = try XCTUnwrap(persistence.viewContext.fetch(request).first)
         preferences.dailyGoalML = value
         try persistence.viewContext.save()
     }
 
+    @MainActor
     private func makeDate(
         year: Int,
         month: Int,
         day: Int,
         hour: Int,
-        minute: Int = 0
+        minute: Int = 0,
+        calendar: Calendar
     ) -> Date {
         calendar.date(from: DateComponents(
             year: year,
