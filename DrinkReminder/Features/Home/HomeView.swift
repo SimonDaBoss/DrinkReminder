@@ -2,6 +2,7 @@ import SwiftUI
 
 struct HomeView: View {
     @ObservedObject var viewModel: HomeViewModel
+    @ObservedObject var reminderViewModel: ReminderViewModel
     let storageWarning: String?
 
     @Environment(\.scenePhase) private var scenePhase
@@ -9,6 +10,7 @@ struct HomeView: View {
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @State private var isShowingCustomAmount = false
+    @State private var isShowingReminders = false
 
     private var columns: [GridItem] {
         if dynamicTypeSize.isAccessibilitySize {
@@ -67,6 +69,9 @@ struct HomeView: View {
                 viewModel.logCustom(displayAmount: amount)
             }
         }
+        .sheet(isPresented: $isShowingReminders) {
+            ReminderSettingsView(viewModel: reminderViewModel)
+        }
         .alert(
             "Couldn’t Update Hydration",
             isPresented: Binding(
@@ -120,10 +125,14 @@ struct HomeView: View {
 
             Spacer()
 
-            Image(systemName: "drop.circle.fill")
-                .font(.system(size: 38))
-                .foregroundStyle(.blue)
-                .accessibilityHidden(true)
+            Button {
+                isShowingReminders = true
+            } label: {
+                Image(systemName: "bell.circle.fill")
+                    .font(.system(size: 38))
+                    .foregroundStyle(.blue)
+            }
+            .accessibilityLabel("Hydration reminder settings")
         }
     }
 
@@ -148,7 +157,7 @@ struct HomeView: View {
 
     private var quickAddSection: some View {
         VStack(alignment: .leading, spacing: 14) {
-            Text("Quick add")
+            Text("What did you drink?")
                 .font(.title3.bold())
 
             Button {
@@ -164,9 +173,9 @@ struct HomeView: View {
                     }
 
                     VStack(alignment: .leading, spacing: 2) {
-                        Text("Add \(viewModel.preferredAmountText)")
+                        Text("I drank my \(viewModel.preferredContainerName)")
                             .font(.headline)
-                        Text("Your usual drink")
+                        Text("About \(viewModel.preferredAmountText)")
                             .font(.caption)
                             .opacity(0.82)
                     }
@@ -185,7 +194,12 @@ struct HomeView: View {
             }
             .buttonStyle(.plain)
             .disabled(viewModel.defaultDrinkAmountML <= 0)
-            .accessibilityLabel("Add preferred amount, \(viewModel.preferredAmountText)")
+            .accessibilityLabel("I drank my \(viewModel.preferredContainerName), about \(viewModel.preferredAmountText)")
+
+            HStack(spacing: 12) {
+                estimateButton("A few sips", fraction: 0.25, systemImage: "drop")
+                estimateButton("About half", fraction: 0.5, systemImage: "circle.lefthalf.filled")
+            }
 
             LazyVGrid(columns: columns, spacing: 12) {
                 ForEach(viewModel.presets.filter { !$0.isDefault }) { preset in
@@ -203,7 +217,7 @@ struct HomeView: View {
                             .foregroundStyle(.purple)
                             .frame(width: 30)
 
-                        Text("Custom")
+                        Text("Different")
                             .font(.headline)
                             .foregroundStyle(.primary)
                         Spacer(minLength: 0)
@@ -216,6 +230,24 @@ struct HomeView: View {
                 .accessibilityLabel("Add a custom water amount")
             }
         }
+    }
+
+    private func estimateButton(
+        _ title: String,
+        fraction: Double,
+        systemImage: String
+    ) -> some View {
+        Button {
+            viewModel.logEstimatedFraction(fraction)
+        } label: {
+            Label(title, systemImage: systemImage)
+                .font(.subheadline.weight(.semibold))
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 12)
+                .background(.thinMaterial, in: Capsule())
+        }
+        .buttonStyle(.plain)
+        .accessibilityHint("Uses your usual \(viewModel.preferredContainerName) as an estimate")
     }
 
     private func undoBanner(_ undoState: HomeViewModel.UndoState) -> some View {

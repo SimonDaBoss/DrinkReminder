@@ -6,6 +6,7 @@ struct RootView: View {
     var body: some View {
         HomeView(
             viewModel: environment.homeViewModel,
+            reminderViewModel: environment.reminderViewModel,
             storageWarning: environment.startupError
         )
     }

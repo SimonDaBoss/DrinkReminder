@@ -41,6 +41,16 @@
 		100000000000000000000021 /* CustomWaterSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000023 /* CustomWaterSheet.swift */; };
 		100000000000000000000022 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000024 /* HomeView.swift */; };
 		100000000000000000000023 /* HomeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000025 /* HomeViewModelTests.swift */; };
+		100000000000000000000024 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000026 /* AppDelegate.swift */; };
+		100000000000000000000025 /* ReminderTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000027 /* ReminderTypes.swift */; };
+		100000000000000000000026 /* ReminderDateGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000028 /* ReminderDateGenerator.swift */; };
+		100000000000000000000027 /* NotificationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000029 /* NotificationConstants.swift */; };
+		100000000000000000000028 /* NotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20000000000000000000002A /* NotificationScheduler.swift */; };
+		100000000000000000000029 /* ReminderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20000000000000000000002B /* ReminderManager.swift */; };
+		10000000000000000000002A /* ReminderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20000000000000000000002C /* ReminderViewModel.swift */; };
+		10000000000000000000002B /* ReminderSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20000000000000000000002D /* ReminderSettingsView.swift */; };
+		10000000000000000000002C /* ReminderDateGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20000000000000000000002E /* ReminderDateGeneratorTests.swift */; };
+		10000000000000000000002D /* ReminderManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20000000000000000000002F /* ReminderManagerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +101,16 @@
 		200000000000000000000023 /* CustomWaterSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminder/Features/Home/CustomWaterSheet.swift; sourceTree = SOURCE_ROOT; };
 		200000000000000000000024 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminder/Features/Home/HomeView.swift; sourceTree = SOURCE_ROOT; };
 		200000000000000000000025 /* HomeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminderTests/HomeViewModelTests.swift; sourceTree = SOURCE_ROOT; };
+		200000000000000000000026 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminder/App/AppDelegate.swift; sourceTree = SOURCE_ROOT; };
+		200000000000000000000027 /* ReminderTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminder/Domain/Models/ReminderTypes.swift; sourceTree = SOURCE_ROOT; };
+		200000000000000000000028 /* ReminderDateGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminder/Domain/Rules/ReminderDateGenerator.swift; sourceTree = SOURCE_ROOT; };
+		200000000000000000000029 /* NotificationConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminder/Infrastructure/Notifications/NotificationConstants.swift; sourceTree = SOURCE_ROOT; };
+		20000000000000000000002A /* NotificationScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminder/Infrastructure/Notifications/NotificationScheduler.swift; sourceTree = SOURCE_ROOT; };
+		20000000000000000000002B /* ReminderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminder/Domain/Services/ReminderManager.swift; sourceTree = SOURCE_ROOT; };
+		20000000000000000000002C /* ReminderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminder/Features/Reminders/ReminderViewModel.swift; sourceTree = SOURCE_ROOT; };
+		20000000000000000000002D /* ReminderSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminder/Features/Reminders/ReminderSettingsView.swift; sourceTree = SOURCE_ROOT; };
+		20000000000000000000002E /* ReminderDateGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminderTests/ReminderDateGeneratorTests.swift; sourceTree = SOURCE_ROOT; };
+		20000000000000000000002F /* ReminderManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminderTests/ReminderManagerTests.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +162,14 @@
 				200000000000000000000022 /* QuickAddPresetButton.swift */,
 				200000000000000000000023 /* CustomWaterSheet.swift */,
 				200000000000000000000024 /* HomeView.swift */,
+				200000000000000000000026 /* AppDelegate.swift */,
+				200000000000000000000027 /* ReminderTypes.swift */,
+				200000000000000000000028 /* ReminderDateGenerator.swift */,
+				200000000000000000000029 /* NotificationConstants.swift */,
+				20000000000000000000002A /* NotificationScheduler.swift */,
+				20000000000000000000002B /* ReminderManager.swift */,
+				20000000000000000000002C /* ReminderViewModel.swift */,
+				20000000000000000000002D /* ReminderSettingsView.swift */,
 			);
 			name = DrinkReminder;
 			sourceTree = "<group>";
@@ -153,6 +181,8 @@
 				200000000000000000000018 /* PersistenceBootstrapperTests.swift */,
 				200000000000000000000019 /* VolumeConverterTests.swift */,
 				200000000000000000000025 /* HomeViewModelTests.swift */,
+				20000000000000000000002E /* ReminderDateGeneratorTests.swift */,
+				20000000000000000000002F /* ReminderManagerTests.swift */,
 			);
 			name = DrinkReminderTests;
 			sourceTree = "<group>";
@@ -267,6 +297,14 @@
 				100000000000000000000020 /* QuickAddPresetButton.swift in Sources */,
 				100000000000000000000021 /* CustomWaterSheet.swift in Sources */,
 				100000000000000000000022 /* HomeView.swift in Sources */,
+				100000000000000000000024 /* AppDelegate.swift in Sources */,
+				100000000000000000000025 /* ReminderTypes.swift in Sources */,
+				100000000000000000000026 /* ReminderDateGenerator.swift in Sources */,
+				100000000000000000000027 /* NotificationConstants.swift in Sources */,
+				100000000000000000000028 /* NotificationScheduler.swift in Sources */,
+				100000000000000000000029 /* ReminderManager.swift in Sources */,
+				10000000000000000000002A /* ReminderViewModel.swift in Sources */,
+				10000000000000000000002B /* ReminderSettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,6 +316,8 @@
 				100000000000000000000018 /* PersistenceBootstrapperTests.swift in Sources */,
 				100000000000000000000019 /* VolumeConverterTests.swift in Sources */,
 				100000000000000000000023 /* HomeViewModelTests.swift in Sources */,
+				10000000000000000000002C /* ReminderDateGeneratorTests.swift in Sources */,
+				10000000000000000000002D /* ReminderManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -64,6 +64,21 @@ final class HomeViewModelTests: XCTestCase {
     }
 
     @MainActor
+    func testFewSipsUsesQuarterOfUsualContainer() throws {
+        let fixture = try makeFixture(goalML: 1_000, defaultAmountML: 400)
+        let viewModel = HomeViewModel(
+            hydrationTracker: fixture.service,
+            haptics: HapticSpy()
+        )
+
+        viewModel.load()
+        viewModel.logEstimatedFraction(0.25)
+
+        XCTAssertEqual(viewModel.summary?.totalML, 100)
+        XCTAssertEqual(viewModel.preferredContainerName, "cup")
+    }
+
+    @MainActor
     private func makeFixture(
         goalML: Double,
         defaultAmountML: Double

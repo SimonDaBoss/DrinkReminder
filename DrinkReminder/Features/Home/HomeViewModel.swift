@@ -18,16 +18,19 @@ final class HomeViewModel: ObservableObject {
 
     private let hydrationTracker: HydrationTrackingService
     private let haptics: any HapticProviding
+    private weak var reminderRefresher: (any HydrationReminderRefreshing)?
     private var hapticsEnabled = true
     private var reactionTask: Task<Void, Never>?
     private var undoDismissTask: Task<Void, Never>?
 
     init(
         hydrationTracker: HydrationTrackingService,
-        haptics: any HapticProviding
+        haptics: any HapticProviding,
+        reminderRefresher: (any HydrationReminderRefreshing)? = nil
     ) {
         self.hydrationTracker = hydrationTracker
         self.haptics = haptics
+        self.reminderRefresher = reminderRefresher
     }
 
     convenience init(hydrationTracker: HydrationTrackingService) {
@@ -57,6 +60,10 @@ final class HomeViewModel: ObservableObject {
             milliliters: defaultDrinkAmountML,
             unit: displayUnit
         )
+    }
+
+    var preferredContainerName: String {
+        presets.first(where: \.isDefault)?.name.lowercased() ?? "usual drink"
     }
 
     var progressPercentText: String {
@@ -90,13 +97,24 @@ final class HomeViewModel: ObservableObject {
             presets = configuration.presets
             summary = try hydrationTracker.todaySummary()
             petMood = restingMood
+            reminderRefresher?.hydrationStateDidChange()
         } catch {
             errorMessage = error.localizedDescription
         }
     }
 
     func logPreferredAmount() {
-        logWater(volumeML: defaultDrinkAmountML, source: .quickAdd)
+        let defaultPreset = presets.first(where: \.isDefault)
+        logWater(
+            volumeML: defaultDrinkAmountML,
+            source: defaultPreset == nil ? .quickAdd : .preset,
+            presetID: defaultPreset?.id
+        )
+    }
+
+    func logEstimatedFraction(_ fraction: Double) {
+        guard fraction.isFinite, fraction > 0 else { return }
+        logWater(volumeML: defaultDrinkAmountML * fraction, source: .quickAdd)
     }
 
     func log(preset: ContainerPreset) {
@@ -119,6 +137,7 @@ final class HomeViewModel: ObservableObject {
             if hapticsEnabled {
                 haptics.undoCompleted()
             }
+            reminderRefresher?.hydrationStateDidChange()
         } catch {
             errorMessage = error.localizedDescription
             self.undoState = nil
@@ -148,6 +167,7 @@ final class HomeViewModel: ObservableObject {
             }
             react(to: result)
             scheduleUndoDismissal()
+            reminderRefresher?.hydrationStateDidChange()
         } catch {
             errorMessage = error.localizedDescription
         }

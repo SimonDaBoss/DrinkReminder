@@ -5,7 +5,9 @@ import Foundation
 final class AppEnvironment: ObservableObject {
     let persistence: PersistenceController
     let hydrationTracker: HydrationTrackingService
+    let reminderManager: ReminderManager
     let homeViewModel: HomeViewModel
+    let reminderViewModel: ReminderViewModel
 
     @Published private(set) var startupError: String?
 
@@ -16,7 +18,18 @@ final class AppEnvironment: ObservableObject {
             self.persistence = persistence
             let hydrationTracker = HydrationTrackingService(context: persistence.viewContext)
             self.hydrationTracker = hydrationTracker
-            self.homeViewModel = HomeViewModel(hydrationTracker: hydrationTracker)
+            let reminderManager = ReminderManager(
+                context: persistence.viewContext,
+                hydrationTracker: hydrationTracker
+            )
+            self.reminderManager = reminderManager
+            self.homeViewModel = HomeViewModel(
+                hydrationTracker: hydrationTracker,
+                haptics: HapticClient(),
+                reminderRefresher: reminderManager
+            )
+            self.reminderViewModel = ReminderViewModel(manager: reminderManager)
+            reminderManager.registerNotificationCategories()
         } catch {
             // Keeping an in-memory store available lets the app explain a disk failure
             // instead of terminating before it can present UI.
@@ -25,8 +38,45 @@ final class AppEnvironment: ObservableObject {
             self.persistence = fallback
             let hydrationTracker = HydrationTrackingService(context: fallback.viewContext)
             self.hydrationTracker = hydrationTracker
-            self.homeViewModel = HomeViewModel(hydrationTracker: hydrationTracker)
+            let reminderManager = ReminderManager(
+                context: fallback.viewContext,
+                hydrationTracker: hydrationTracker
+            )
+            self.reminderManager = reminderManager
+            self.homeViewModel = HomeViewModel(
+                hydrationTracker: hydrationTracker,
+                haptics: HapticClient(),
+                reminderRefresher: reminderManager
+            )
+            self.reminderViewModel = ReminderViewModel(manager: reminderManager)
+            reminderManager.registerNotificationCategories()
             self.startupError = error.localizedDescription
+        }
+    }
+
+    func handleNotificationAction(_ identifier: String) async {
+        do {
+            switch identifier {
+            case NotificationConstants.Action.drank:
+                let configuration = try hydrationTracker.configuration()
+                _ = try hydrationTracker.logWater(
+                    volumeML: configuration.defaultDrinkAmountML,
+                    source: .notification
+                )
+                homeViewModel.load()
+                try await reminderManager.refreshSchedule()
+
+            case NotificationConstants.Action.snooze:
+                try await reminderManager.scheduleSnooze()
+
+            case NotificationConstants.Action.skip:
+                break
+
+            default:
+                break
+            }
+        } catch {
+            homeViewModel.errorMessage = error.localizedDescription
         }
     }
 }

@@ -2,7 +2,14 @@ import SwiftUI
 
 @main
 struct DrinkReminderApp: App {
-    @StateObject private var environment = AppEnvironment()
+    @UIApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
+    @StateObject private var environment: AppEnvironment
+
+    init() {
+        let environment = AppEnvironment()
+        _environment = StateObject(wrappedValue: environment)
+        AppDelegate.environment = environment
+    }
 
     var body: some Scene {
         WindowGroup {

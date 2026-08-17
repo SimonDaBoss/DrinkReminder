@@ -19,7 +19,8 @@ let package = Package(
                 "App",
                 "Features/Home/Components",
                 "Features/Home/CustomWaterSheet.swift",
-                "Features/Home/HomeView.swift"
+                "Features/Home/HomeView.swift",
+                "Features/Reminders/ReminderSettingsView.swift"
             ]
         ),
         .testTarget(

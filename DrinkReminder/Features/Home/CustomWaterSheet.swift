@@ -30,8 +30,9 @@ struct CustomWaterSheet: View {
                 VStack(spacing: 8) {
                     Text("How much water?")
                         .font(.title2.bold())
-                    Text("Enter the amount you just drank.")
+                    Text("Enter the amount you just drank. An estimate is totally fine.")
                         .foregroundStyle(.secondary)
+                        .multilineTextAlignment(.center)
                 }
 
                 HStack(alignment: .firstTextBaseline, spacing: 8) {
