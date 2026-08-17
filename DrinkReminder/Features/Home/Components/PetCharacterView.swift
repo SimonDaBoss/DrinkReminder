@@ -2,6 +2,7 @@ import SwiftUI
 
 struct PetCharacterView: View {
     let mood: PetMood
+    var species: PetSpecies = .axolotl
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var isFloating = false
@@ -13,7 +14,7 @@ struct PetCharacterView: View {
                     .transition(.scale.combined(with: .opacity))
             }
 
-            gills
+            headDetails
             bodyShape
 
             if mood == .drinking {
@@ -45,7 +46,7 @@ struct PetCharacterView: View {
             Ellipse()
                 .fill(
                     LinearGradient(
-                        colors: [Color(red: 0.48, green: 0.88, blue: 0.96), .cyan],
+                        colors: bodyColors,
                         startPoint: .topLeading,
                         endPoint: .bottomTrailing
                     )
@@ -104,6 +105,38 @@ struct PetCharacterView: View {
             gillCluster.rotationEffect(.degrees(12)).scaleEffect(x: -1)
         }
         .offset(y: -8)
+    }
+
+    @ViewBuilder
+    private var headDetails: some View {
+        switch species {
+        case .axolotl:
+            gills
+        case .otter:
+            HStack(spacing: 76) {
+                Circle().frame(width: 34, height: 34)
+                Circle().frame(width: 34, height: 34)
+            }
+            .foregroundStyle(Color(red: 0.45, green: 0.29, blue: 0.2))
+            .offset(y: -42)
+        case .droplet:
+            RoundedRectangle(cornerRadius: 8)
+                .fill(Color(red: 0.36, green: 0.72, blue: 1))
+                .frame(width: 42, height: 42)
+                .rotationEffect(.degrees(45))
+                .offset(y: -55)
+        }
+    }
+
+    private var bodyColors: [Color] {
+        switch species {
+        case .axolotl:
+            return [Color(red: 0.48, green: 0.88, blue: 0.96), .cyan]
+        case .otter:
+            return [Color(red: 0.72, green: 0.51, blue: 0.34), Color(red: 0.48, green: 0.3, blue: 0.2)]
+        case .droplet:
+            return [Color(red: 0.45, green: 0.85, blue: 1), Color(red: 0.25, green: 0.55, blue: 1)]
+        }
     }
 
     private var gillCluster: some View {

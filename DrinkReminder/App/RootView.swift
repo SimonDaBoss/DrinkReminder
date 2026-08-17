@@ -4,11 +4,33 @@ struct RootView: View {
     @EnvironmentObject private var environment: AppEnvironment
 
     var body: some View {
-        HomeView(
-            viewModel: environment.homeViewModel,
-            reminderViewModel: environment.reminderViewModel,
-            storageWarning: environment.startupError
-        )
+        Group {
+            if environment.onboardingCompleted {
+                MainTabView(
+                    homeViewModel: environment.homeViewModel,
+                    reminderViewModel: environment.reminderViewModel,
+                    settingsViewModel: environment.settingsViewModel,
+                    storageWarning: environment.startupError,
+                    onSettingsChanged: environment.refreshAppState,
+                    onContainerChanged: environment.refreshHomeState,
+                    onReset: environment.handleDataReset
+                )
+            } else {
+                OnboardingView(
+                    viewModel: environment.onboardingViewModel,
+                    onComplete: environment.refreshAppState
+                )
+            }
+        }
+        .preferredColorScheme(preferredColorScheme)
+    }
+
+    private var preferredColorScheme: ColorScheme? {
+        switch environment.appearance {
+        case .system: return nil
+        case .light: return .light
+        case .dark: return .dark
+        }
     }
 }
 

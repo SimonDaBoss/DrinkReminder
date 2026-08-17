@@ -3,6 +3,7 @@ import SwiftUI
 struct PetEnvironmentCard: View {
     let progress: Double
     let mood: PetMood
+    let species: PetSpecies
     let progressPercentText: String
 
     var body: some View {
@@ -23,7 +24,7 @@ struct PetEnvironmentCard: View {
                     HydrationProgressRing(progress: progress)
                         .frame(width: 210, height: 210)
 
-                    PetCharacterView(mood: mood)
+                    PetCharacterView(mood: mood, species: species)
                 }
 
                 Text(progressPercentText)

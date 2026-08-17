@@ -140,6 +140,22 @@ final class HydrationTrackingService {
         try fetchOrCreateDay(containing: clock.now).summary
     }
 
+    func updateTodayGoal(_ goalML: Double) throws {
+        guard goalML.isFinite, goalML > 0 else {
+            throw HydrationTrackingError.invalidDailyGoal
+        }
+
+        let localDay = LocalDay(containing: clock.now, calendar: calendar)
+        guard let day = try fetchDay(identifier: localDay.identifier) else { return }
+        day.goalML = goalML
+        if day.totalML >= goalML {
+            day.goalReachedAt = day.goalReachedAt ?? clock.now
+        } else {
+            day.goalReachedAt = nil
+        }
+        try context.save()
+    }
+
     func summary(for date: Date) throws -> HydrationSummary? {
         let localDay = LocalDay(containing: date, calendar: calendar)
         return try fetchDay(identifier: localDay.identifier)?.summary

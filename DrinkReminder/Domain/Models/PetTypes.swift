@@ -29,3 +29,13 @@ enum XPAwardReason: String, Codable {
     case dailyGoal
     case streak
 }
+
+struct PetIdentity: Equatable {
+    let name: String
+    let species: PetSpecies
+}
+
+@MainActor
+protocol PetProfileProviding: AnyObject {
+    func petIdentity() throws -> PetIdentity
+}

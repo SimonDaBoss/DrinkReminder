@@ -38,6 +38,7 @@ struct HomeView: View {
                         PetEnvironmentCard(
                             progress: viewModel.progress,
                             mood: viewModel.petMood,
+                            species: viewModel.petIdentity.species,
                             progressPercentText: viewModel.progressPercentText
                         )
 
@@ -119,7 +120,7 @@ struct HomeView: View {
                     .font(.caption.weight(.bold))
                     .tracking(1.4)
                     .foregroundStyle(.secondary)
-                Text("Keep your buddy happy")
+                Text("Keep \(viewModel.petIdentity.name) happy")
                     .font(.system(.title, design: .rounded, weight: .bold))
             }
 

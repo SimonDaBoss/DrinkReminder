@@ -13,12 +13,14 @@ final class HomeViewModel: ObservableObject {
     @Published private(set) var displayUnit: VolumeUnit = .ounces
     @Published private(set) var defaultDrinkAmountML: Double = 0
     @Published private(set) var petMood: PetMood = .idle
+    @Published private(set) var petIdentity = PetIdentity(name: "Puddle", species: .axolotl)
     @Published private(set) var undoState: UndoState?
     @Published var errorMessage: String?
 
     private let hydrationTracker: HydrationTrackingService
     private let haptics: any HapticProviding
     private weak var reminderRefresher: (any HydrationReminderRefreshing)?
+    private weak var petProfileProvider: (any PetProfileProviding)?
     private var hapticsEnabled = true
     private var reactionTask: Task<Void, Never>?
     private var undoDismissTask: Task<Void, Never>?
@@ -26,11 +28,13 @@ final class HomeViewModel: ObservableObject {
     init(
         hydrationTracker: HydrationTrackingService,
         haptics: any HapticProviding,
-        reminderRefresher: (any HydrationReminderRefreshing)? = nil
+        reminderRefresher: (any HydrationReminderRefreshing)? = nil,
+        petProfileProvider: (any PetProfileProviding)? = nil
     ) {
         self.hydrationTracker = hydrationTracker
         self.haptics = haptics
         self.reminderRefresher = reminderRefresher
+        self.petProfileProvider = petProfileProvider
     }
 
     convenience init(hydrationTracker: HydrationTrackingService) {
@@ -95,6 +99,9 @@ final class HomeViewModel: ObservableObject {
             defaultDrinkAmountML = configuration.defaultDrinkAmountML
             hapticsEnabled = configuration.hapticsEnabled
             presets = configuration.presets
+            if let petProfileProvider {
+                petIdentity = try petProfileProvider.petIdentity()
+            }
             summary = try hydrationTracker.todaySummary()
             petMood = restingMood
             reminderRefresher?.hydrationStateDidChange()
