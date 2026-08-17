@@ -1,0 +1,266 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		100000000000000000000001 /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000001 /* AppEnvironment.swift */; };
+		100000000000000000000002 /* DrinkReminderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000002 /* DrinkReminderApp.swift */; };
+		100000000000000000000003 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000003 /* RootView.swift */; };
+		100000000000000000000004 /* HydrationTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000004 /* HydrationTypes.swift */; };
+		100000000000000000000005 /* PetTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000005 /* PetTypes.swift */; };
+		100000000000000000000006 /* PreferenceTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000006 /* PreferenceTypes.swift */; };
+		100000000000000000000007 /* VolumeConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000007 /* VolumeConverter.swift */; };
+		100000000000000000000008 /* HydrationTrackingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000008 /* HydrationTrackingService.swift */; };
+		100000000000000000000009 /* Clock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000009 /* Clock.swift */; };
+		10000000000000000000000A /* LocalDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20000000000000000000000A /* LocalDay.swift */; };
+		10000000000000000000000B /* ManagedObjectModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20000000000000000000000B /* ManagedObjectModelFactory.swift */; };
+		10000000000000000000000C /* AppPreferencesEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20000000000000000000000C /* AppPreferencesEntity.swift */; };
+		10000000000000000000000D /* ContainerPresetEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20000000000000000000000D /* ContainerPresetEntity.swift */; };
+		10000000000000000000000E /* CosmeticUnlockEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20000000000000000000000E /* CosmeticUnlockEntity.swift */; };
+		10000000000000000000000F /* HydrationDayEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20000000000000000000000F /* HydrationDayEntity.swift */; };
+		100000000000000000000010 /* PetProfileEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000010 /* PetProfileEntity.swift */; };
+		100000000000000000000011 /* ReminderPreferencesEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000011 /* ReminderPreferencesEntity.swift */; };
+		100000000000000000000012 /* UserProfileEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000012 /* UserProfileEntity.swift */; };
+		100000000000000000000013 /* WaterLogEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000013 /* WaterLogEntity.swift */; };
+		100000000000000000000014 /* XPAwardEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000014 /* XPAwardEntity.swift */; };
+		100000000000000000000015 /* PersistenceBootstrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000015 /* PersistenceBootstrapper.swift */; };
+		100000000000000000000016 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000016 /* PersistenceController.swift */; };
+		100000000000000000000017 /* HydrationTrackingServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000017 /* HydrationTrackingServiceTests.swift */; };
+		100000000000000000000018 /* PersistenceBootstrapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000018 /* PersistenceBootstrapperTests.swift */; };
+		100000000000000000000019 /* VolumeConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000019 /* VolumeConverterTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		300000000000000000000001 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 500000000000000000000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 600000000000000000000001;
+			remoteInfo = DrinkReminder;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		200000000000000000000001 /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminder/App/AppEnvironment.swift; sourceTree = SOURCE_ROOT; };
+		200000000000000000000002 /* DrinkReminderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminder/App/DrinkReminderApp.swift; sourceTree = SOURCE_ROOT; };
+		200000000000000000000003 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminder/App/RootView.swift; sourceTree = SOURCE_ROOT; };
+		200000000000000000000004 /* HydrationTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminder/Domain/Models/HydrationTypes.swift; sourceTree = SOURCE_ROOT; };
+		200000000000000000000005 /* PetTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminder/Domain/Models/PetTypes.swift; sourceTree = SOURCE_ROOT; };
+		200000000000000000000006 /* PreferenceTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminder/Domain/Models/PreferenceTypes.swift; sourceTree = SOURCE_ROOT; };
+		200000000000000000000007 /* VolumeConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminder/Domain/Rules/VolumeConverter.swift; sourceTree = SOURCE_ROOT; };
+		200000000000000000000008 /* HydrationTrackingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminder/Domain/Services/HydrationTrackingService.swift; sourceTree = SOURCE_ROOT; };
+		200000000000000000000009 /* Clock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminder/Infrastructure/Time/Clock.swift; sourceTree = SOURCE_ROOT; };
+		20000000000000000000000A /* LocalDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminder/Infrastructure/Time/LocalDay.swift; sourceTree = SOURCE_ROOT; };
+		20000000000000000000000B /* ManagedObjectModelFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminder/Persistence/ManagedObjectModelFactory.swift; sourceTree = SOURCE_ROOT; };
+		20000000000000000000000C /* AppPreferencesEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminder/Persistence/Models/AppPreferencesEntity.swift; sourceTree = SOURCE_ROOT; };
+		20000000000000000000000D /* ContainerPresetEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminder/Persistence/Models/ContainerPresetEntity.swift; sourceTree = SOURCE_ROOT; };
+		20000000000000000000000E /* CosmeticUnlockEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminder/Persistence/Models/CosmeticUnlockEntity.swift; sourceTree = SOURCE_ROOT; };
+		20000000000000000000000F /* HydrationDayEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminder/Persistence/Models/HydrationDayEntity.swift; sourceTree = SOURCE_ROOT; };
+		200000000000000000000010 /* PetProfileEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminder/Persistence/Models/PetProfileEntity.swift; sourceTree = SOURCE_ROOT; };
+		200000000000000000000011 /* ReminderPreferencesEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminder/Persistence/Models/ReminderPreferencesEntity.swift; sourceTree = SOURCE_ROOT; };
+		200000000000000000000012 /* UserProfileEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminder/Persistence/Models/UserProfileEntity.swift; sourceTree = SOURCE_ROOT; };
+		200000000000000000000013 /* WaterLogEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminder/Persistence/Models/WaterLogEntity.swift; sourceTree = SOURCE_ROOT; };
+		200000000000000000000014 /* XPAwardEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminder/Persistence/Models/XPAwardEntity.swift; sourceTree = SOURCE_ROOT; };
+		200000000000000000000015 /* PersistenceBootstrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminder/Persistence/PersistenceBootstrapper.swift; sourceTree = SOURCE_ROOT; };
+		200000000000000000000016 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminder/Persistence/PersistenceController.swift; sourceTree = SOURCE_ROOT; };
+		200000000000000000000017 /* HydrationTrackingServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminderTests/HydrationTrackingServiceTests.swift; sourceTree = SOURCE_ROOT; };
+		200000000000000000000018 /* PersistenceBootstrapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminderTests/PersistenceBootstrapperTests.swift; sourceTree = SOURCE_ROOT; };
+		200000000000000000000019 /* VolumeConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminderTests/VolumeConverterTests.swift; sourceTree = SOURCE_ROOT; };
+		20000000000000000000001A /* DrinkReminder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrinkReminder.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		20000000000000000000001B /* DrinkReminderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DrinkReminderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		700000000000000000000001 /* Frameworks */ = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+		700000000000000000000002 /* Frameworks */ = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		400000000000000000000001 = {
+			isa = PBXGroup;
+			children = (
+				400000000000000000000002 /* DrinkReminder */,
+				400000000000000000000003 /* DrinkReminderTests */,
+				400000000000000000000004 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		400000000000000000000002 /* DrinkReminder */ = {
+			isa = PBXGroup;
+			children = (
+				200000000000000000000001 /* AppEnvironment.swift */,
+				200000000000000000000002 /* DrinkReminderApp.swift */,
+				200000000000000000000003 /* RootView.swift */,
+				200000000000000000000004 /* HydrationTypes.swift */,
+				200000000000000000000005 /* PetTypes.swift */,
+				200000000000000000000006 /* PreferenceTypes.swift */,
+				200000000000000000000007 /* VolumeConverter.swift */,
+				200000000000000000000008 /* HydrationTrackingService.swift */,
+				200000000000000000000009 /* Clock.swift */,
+				20000000000000000000000A /* LocalDay.swift */,
+				20000000000000000000000B /* ManagedObjectModelFactory.swift */,
+				20000000000000000000000C /* AppPreferencesEntity.swift */,
+				20000000000000000000000D /* ContainerPresetEntity.swift */,
+				20000000000000000000000E /* CosmeticUnlockEntity.swift */,
+				20000000000000000000000F /* HydrationDayEntity.swift */,
+				200000000000000000000010 /* PetProfileEntity.swift */,
+				200000000000000000000011 /* ReminderPreferencesEntity.swift */,
+				200000000000000000000012 /* UserProfileEntity.swift */,
+				200000000000000000000013 /* WaterLogEntity.swift */,
+				200000000000000000000014 /* XPAwardEntity.swift */,
+				200000000000000000000015 /* PersistenceBootstrapper.swift */,
+				200000000000000000000016 /* PersistenceController.swift */,
+			);
+			name = DrinkReminder;
+			sourceTree = "<group>";
+		};
+		400000000000000000000003 /* DrinkReminderTests */ = {
+			isa = PBXGroup;
+			children = (
+				200000000000000000000017 /* HydrationTrackingServiceTests.swift */,
+				200000000000000000000018 /* PersistenceBootstrapperTests.swift */,
+				200000000000000000000019 /* VolumeConverterTests.swift */,
+			);
+			name = DrinkReminderTests;
+			sourceTree = "<group>";
+		};
+		400000000000000000000004 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				20000000000000000000001A /* DrinkReminder.app */,
+				20000000000000000000001B /* DrinkReminderTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		600000000000000000000001 /* DrinkReminder */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A00000000000000000000001 /* Build configuration list for PBXNativeTarget "DrinkReminder" */;
+			buildPhases = (
+				800000000000000000000001 /* Sources */,
+				700000000000000000000001 /* Frameworks */,
+				900000000000000000000001 /* Resources */,
+			);
+			buildRules = ();
+			dependencies = ();
+			name = DrinkReminder;
+			productName = DrinkReminder;
+			productReference = 20000000000000000000001A /* DrinkReminder.app */;
+			productType = "com.apple.product-type.application";
+		};
+		600000000000000000000002 /* DrinkReminderTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A00000000000000000000002 /* Build configuration list for PBXNativeTarget "DrinkReminderTests" */;
+			buildPhases = (
+				800000000000000000000002 /* Sources */,
+				700000000000000000000002 /* Frameworks */,
+				900000000000000000000002 /* Resources */,
+			);
+			buildRules = ();
+			dependencies = (A10000000000000000000001 /* PBXTargetDependency */);
+			name = DrinkReminderTests;
+			productName = DrinkReminderTests;
+			productReference = 20000000000000000000001B /* DrinkReminderTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		500000000000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					600000000000000000000001 = {CreatedOnToolsVersion = 15.0; };
+					600000000000000000000002 = {CreatedOnToolsVersion = 15.0; TestTargetID = 600000000000000000000001; };
+				};
+			};
+			buildConfigurationList = A00000000000000000000003 /* Build configuration list for PBXProject "DrinkReminder" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (en, Base);
+			mainGroup = 400000000000000000000001;
+			productRefGroup = 400000000000000000000004 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (600000000000000000000001 /* DrinkReminder */, 600000000000000000000002 /* DrinkReminderTests */);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		900000000000000000000001 /* Resources */ = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+		900000000000000000000002 /* Resources */ = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		800000000000000000000001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				100000000000000000000001 /* AppEnvironment.swift in Sources */,
+				100000000000000000000002 /* DrinkReminderApp.swift in Sources */,
+				100000000000000000000003 /* RootView.swift in Sources */,
+				100000000000000000000004 /* HydrationTypes.swift in Sources */,
+				100000000000000000000005 /* PetTypes.swift in Sources */,
+				100000000000000000000006 /* PreferenceTypes.swift in Sources */,
+				100000000000000000000007 /* VolumeConverter.swift in Sources */,
+				100000000000000000000008 /* HydrationTrackingService.swift in Sources */,
+				100000000000000000000009 /* Clock.swift in Sources */,
+				10000000000000000000000A /* LocalDay.swift in Sources */,
+				10000000000000000000000B /* ManagedObjectModelFactory.swift in Sources */,
+				10000000000000000000000C /* AppPreferencesEntity.swift in Sources */,
+				10000000000000000000000D /* ContainerPresetEntity.swift in Sources */,
+				10000000000000000000000E /* CosmeticUnlockEntity.swift in Sources */,
+				10000000000000000000000F /* HydrationDayEntity.swift in Sources */,
+				100000000000000000000010 /* PetProfileEntity.swift in Sources */,
+				100000000000000000000011 /* ReminderPreferencesEntity.swift in Sources */,
+				100000000000000000000012 /* UserProfileEntity.swift in Sources */,
+				100000000000000000000013 /* WaterLogEntity.swift in Sources */,
+				100000000000000000000014 /* XPAwardEntity.swift in Sources */,
+				100000000000000000000015 /* PersistenceBootstrapper.swift in Sources */,
+				100000000000000000000016 /* PersistenceController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		800000000000000000000002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				100000000000000000000017 /* HydrationTrackingServiceTests.swift in Sources */,
+				100000000000000000000018 /* PersistenceBootstrapperTests.swift in Sources */,
+				100000000000000000000019 /* VolumeConverterTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A10000000000000000000001 /* PBXTargetDependency */ = {isa = PBXTargetDependency; target = 600000000000000000000001 /* DrinkReminder */; targetProxy = 300000000000000000000001 /* PBXContainerItemProxy */; };
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		B00000000000000000000001 /* Debug */ = {isa = XCBuildConfiguration; buildSettings = {ALWAYS_SEARCH_USER_PATHS = NO; CLANG_ENABLE_MODULES = YES; DEBUG_INFORMATION_FORMAT = dwarf; ENABLE_TESTABILITY = YES; GCC_OPTIMIZATION_LEVEL = 0; IPHONEOS_DEPLOYMENT_TARGET = 16.0; ONLY_ACTIVE_ARCH = YES; SDKROOT = iphoneos; SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG; SWIFT_OPTIMIZATION_LEVEL = "-Onone"; SWIFT_VERSION = 5.0; }; name = Debug; };
+		B00000000000000000000002 /* Release */ = {isa = XCBuildConfiguration; buildSettings = {ALWAYS_SEARCH_USER_PATHS = NO; CLANG_ENABLE_MODULES = YES; DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym"; IPHONEOS_DEPLOYMENT_TARGET = 16.0; SDKROOT = iphoneos; SWIFT_COMPILATION_MODE = wholemodule; SWIFT_OPTIMIZATION_LEVEL = "-O"; SWIFT_VERSION = 5.0; VALIDATE_PRODUCT = YES; }; name = Release; };
+		B00000000000000000000003 /* Debug */ = {isa = XCBuildConfiguration; buildSettings = {CODE_SIGN_STYLE = Automatic; CURRENT_PROJECT_VERSION = 1; ENABLE_PREVIEWS = YES; GENERATE_INFOPLIST_FILE = YES; INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES; INFOPLIST_KEY_UILaunchScreen_Generation = YES; MARKETING_VERSION = 1.0; PRODUCT_BUNDLE_IDENTIFIER = com.simon.DrinkReminder; PRODUCT_NAME = "$(TARGET_NAME)"; SUPPORTED_PLATFORMS = "iphoneos iphonesimulator"; SWIFT_EMIT_LOC_STRINGS = YES; TARGETED_DEVICE_FAMILY = 1; }; name = Debug; };
+		B00000000000000000000004 /* Release */ = {isa = XCBuildConfiguration; buildSettings = {CODE_SIGN_STYLE = Automatic; CURRENT_PROJECT_VERSION = 1; ENABLE_PREVIEWS = YES; GENERATE_INFOPLIST_FILE = YES; INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES; INFOPLIST_KEY_UILaunchScreen_Generation = YES; MARKETING_VERSION = 1.0; PRODUCT_BUNDLE_IDENTIFIER = com.simon.DrinkReminder; PRODUCT_NAME = "$(TARGET_NAME)"; SUPPORTED_PLATFORMS = "iphoneos iphonesimulator"; SWIFT_EMIT_LOC_STRINGS = YES; TARGETED_DEVICE_FAMILY = 1; }; name = Release; };
+		B00000000000000000000005 /* Debug */ = {isa = XCBuildConfiguration; buildSettings = {BUNDLE_LOADER = "$(TEST_HOST)"; CODE_SIGN_STYLE = Automatic; GENERATE_INFOPLIST_FILE = YES; IPHONEOS_DEPLOYMENT_TARGET = 16.0; LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks"; PRODUCT_BUNDLE_IDENTIFIER = com.simon.DrinkReminderTests; PRODUCT_NAME = "$(TARGET_NAME)"; SUPPORTED_PLATFORMS = "iphoneos iphonesimulator"; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = 1; TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DrinkReminder.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/DrinkReminder"; }; name = Debug; };
+		B00000000000000000000006 /* Release */ = {isa = XCBuildConfiguration; buildSettings = {BUNDLE_LOADER = "$(TEST_HOST)"; CODE_SIGN_STYLE = Automatic; GENERATE_INFOPLIST_FILE = YES; IPHONEOS_DEPLOYMENT_TARGET = 16.0; LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks"; PRODUCT_BUNDLE_IDENTIFIER = com.simon.DrinkReminderTests; PRODUCT_NAME = "$(TARGET_NAME)"; SUPPORTED_PLATFORMS = "iphoneos iphonesimulator"; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = 1; TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DrinkReminder.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/DrinkReminder"; }; name = Release; };
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A00000000000000000000001 /* Build configuration list for PBXNativeTarget "DrinkReminder" */ = {isa = XCConfigurationList; buildConfigurations = (B00000000000000000000003 /* Debug */, B00000000000000000000004 /* Release */); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+		A00000000000000000000002 /* Build configuration list for PBXNativeTarget "DrinkReminderTests" */ = {isa = XCConfigurationList; buildConfigurations = (B00000000000000000000005 /* Debug */, B00000000000000000000006 /* Release */); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+		A00000000000000000000003 /* Build configuration list for PBXProject "DrinkReminder" */ = {isa = XCConfigurationList; buildConfigurations = (B00000000000000000000001 /* Debug */, B00000000000000000000002 /* Release */); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+/* End XCConfigurationList section */
+	};
+	rootObject = 500000000000000000000001 /* Project object */;
+}
