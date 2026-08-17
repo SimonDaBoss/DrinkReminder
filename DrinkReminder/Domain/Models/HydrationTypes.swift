@@ -36,8 +36,24 @@ struct HydrationSummary: Equatable {
 }
 
 struct HydrationLogResult: Equatable {
+    let logID: UUID
     let summary: HydrationSummary
     let loggedAmountML: Double
     let crossedHalfway: Bool
     let reachedGoal: Bool
+}
+
+struct ContainerPreset: Identifiable, Equatable, Hashable {
+    let id: UUID
+    let name: String
+    let volumeML: Double
+    let symbolName: String
+    let isDefault: Bool
+}
+
+struct HydrationConfiguration: Equatable {
+    let displayUnit: VolumeUnit
+    let defaultDrinkAmountML: Double
+    let hapticsEnabled: Bool
+    let presets: [ContainerPreset]
 }

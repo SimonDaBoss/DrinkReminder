@@ -122,6 +122,47 @@ final class HydrationTrackingServiceTests: XCTestCase {
     }
 
     @MainActor
+    func testUndoRemovesLogAndRecalculatesGoalCompletion() throws {
+        let (persistence, calendar) = try makeFixture()
+        try setDailyGoal(1_000, in: persistence)
+        let now = makeDate(year: 2026, month: 8, day: 16, hour: 14, calendar: calendar)
+        let service = HydrationTrackingService(
+            context: persistence.viewContext,
+            clock: FixedClock(now: now),
+            calendar: calendar
+        )
+
+        _ = try service.logWater(volumeML: 600, source: .quickAdd)
+        let goalLog = try service.logWater(volumeML: 500, source: .preset)
+        XCTAssertTrue(goalLog.summary.isGoalReached)
+
+        let updatedSummary = try service.undoWaterLog(id: goalLog.logID)
+
+        XCTAssertEqual(updatedSummary.totalML, 600, accuracy: 0.001)
+        XCTAssertFalse(updatedSummary.isGoalReached)
+        XCTAssertNil(updatedSummary.goalReachedAt)
+        XCTAssertEqual(try service.logs(for: now).count, 1)
+    }
+
+    @MainActor
+    func testConfigurationReturnsOrderedValueTypePresets() throws {
+        let (persistence, calendar) = try makeFixture()
+        let now = makeDate(year: 2026, month: 8, day: 16, hour: 14, calendar: calendar)
+        let service = HydrationTrackingService(
+            context: persistence.viewContext,
+            clock: FixedClock(now: now),
+            calendar: calendar
+        )
+
+        let configuration = try service.configuration()
+
+        XCTAssertEqual(configuration.displayUnit, .ounces)
+        XCTAssertTrue(configuration.hapticsEnabled)
+        XCTAssertEqual(configuration.presets.map(\.name), ["Glass", "Cup", "Bottle", "Large Bottle"])
+        XCTAssertEqual(configuration.presets.filter(\.isDefault).map(\.name), ["Cup"])
+    }
+
+    @MainActor
     private func makeFixture() throws -> (PersistenceController, Calendar) {
         let persistence = try PersistenceController(inMemory: true)
         try PersistenceBootstrapper(context: persistence.viewContext).prepareDefaults()

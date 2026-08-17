@@ -31,6 +31,16 @@
 		100000000000000000000017 /* HydrationTrackingServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000017 /* HydrationTrackingServiceTests.swift */; };
 		100000000000000000000018 /* PersistenceBootstrapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000018 /* PersistenceBootstrapperTests.swift */; };
 		100000000000000000000019 /* VolumeConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000019 /* VolumeConverterTests.swift */; };
+		10000000000000000000001A /* VolumeDisplayFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20000000000000000000001C /* VolumeDisplayFormatter.swift */; };
+		10000000000000000000001B /* HapticClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20000000000000000000001D /* HapticClient.swift */; };
+		10000000000000000000001C /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20000000000000000000001E /* HomeViewModel.swift */; };
+		10000000000000000000001D /* HydrationProgressRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20000000000000000000001F /* HydrationProgressRing.swift */; };
+		10000000000000000000001E /* PetCharacterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000020 /* PetCharacterView.swift */; };
+		10000000000000000000001F /* PetEnvironmentCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000021 /* PetEnvironmentCard.swift */; };
+		100000000000000000000020 /* QuickAddPresetButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000022 /* QuickAddPresetButton.swift */; };
+		100000000000000000000021 /* CustomWaterSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000023 /* CustomWaterSheet.swift */; };
+		100000000000000000000022 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000024 /* HomeView.swift */; };
+		100000000000000000000023 /* HomeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000025 /* HomeViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +81,16 @@
 		200000000000000000000019 /* VolumeConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminderTests/VolumeConverterTests.swift; sourceTree = SOURCE_ROOT; };
 		20000000000000000000001A /* DrinkReminder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrinkReminder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		20000000000000000000001B /* DrinkReminderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DrinkReminderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		20000000000000000000001C /* VolumeDisplayFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminder/Domain/Rules/VolumeDisplayFormatter.swift; sourceTree = SOURCE_ROOT; };
+		20000000000000000000001D /* HapticClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminder/Infrastructure/Haptics/HapticClient.swift; sourceTree = SOURCE_ROOT; };
+		20000000000000000000001E /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminder/Features/Home/HomeViewModel.swift; sourceTree = SOURCE_ROOT; };
+		20000000000000000000001F /* HydrationProgressRing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminder/Features/Home/Components/HydrationProgressRing.swift; sourceTree = SOURCE_ROOT; };
+		200000000000000000000020 /* PetCharacterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminder/Features/Home/Components/PetCharacterView.swift; sourceTree = SOURCE_ROOT; };
+		200000000000000000000021 /* PetEnvironmentCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminder/Features/Home/Components/PetEnvironmentCard.swift; sourceTree = SOURCE_ROOT; };
+		200000000000000000000022 /* QuickAddPresetButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminder/Features/Home/Components/QuickAddPresetButton.swift; sourceTree = SOURCE_ROOT; };
+		200000000000000000000023 /* CustomWaterSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminder/Features/Home/CustomWaterSheet.swift; sourceTree = SOURCE_ROOT; };
+		200000000000000000000024 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminder/Features/Home/HomeView.swift; sourceTree = SOURCE_ROOT; };
+		200000000000000000000025 /* HomeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminderTests/HomeViewModelTests.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +133,15 @@
 				200000000000000000000014 /* XPAwardEntity.swift */,
 				200000000000000000000015 /* PersistenceBootstrapper.swift */,
 				200000000000000000000016 /* PersistenceController.swift */,
+				20000000000000000000001C /* VolumeDisplayFormatter.swift */,
+				20000000000000000000001D /* HapticClient.swift */,
+				20000000000000000000001E /* HomeViewModel.swift */,
+				20000000000000000000001F /* HydrationProgressRing.swift */,
+				200000000000000000000020 /* PetCharacterView.swift */,
+				200000000000000000000021 /* PetEnvironmentCard.swift */,
+				200000000000000000000022 /* QuickAddPresetButton.swift */,
+				200000000000000000000023 /* CustomWaterSheet.swift */,
+				200000000000000000000024 /* HomeView.swift */,
 			);
 			name = DrinkReminder;
 			sourceTree = "<group>";
@@ -123,6 +152,7 @@
 				200000000000000000000017 /* HydrationTrackingServiceTests.swift */,
 				200000000000000000000018 /* PersistenceBootstrapperTests.swift */,
 				200000000000000000000019 /* VolumeConverterTests.swift */,
+				200000000000000000000025 /* HomeViewModelTests.swift */,
 			);
 			name = DrinkReminderTests;
 			sourceTree = "<group>";
@@ -228,6 +258,15 @@
 				100000000000000000000014 /* XPAwardEntity.swift in Sources */,
 				100000000000000000000015 /* PersistenceBootstrapper.swift in Sources */,
 				100000000000000000000016 /* PersistenceController.swift in Sources */,
+				10000000000000000000001A /* VolumeDisplayFormatter.swift in Sources */,
+				10000000000000000000001B /* HapticClient.swift in Sources */,
+				10000000000000000000001C /* HomeViewModel.swift in Sources */,
+				10000000000000000000001D /* HydrationProgressRing.swift in Sources */,
+				10000000000000000000001E /* PetCharacterView.swift in Sources */,
+				10000000000000000000001F /* PetEnvironmentCard.swift in Sources */,
+				100000000000000000000020 /* QuickAddPresetButton.swift in Sources */,
+				100000000000000000000021 /* CustomWaterSheet.swift in Sources */,
+				100000000000000000000022 /* HomeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,6 +277,7 @@
 				100000000000000000000017 /* HydrationTrackingServiceTests.swift in Sources */,
 				100000000000000000000018 /* PersistenceBootstrapperTests.swift in Sources */,
 				100000000000000000000019 /* VolumeConverterTests.swift in Sources */,
+				100000000000000000000023 /* HomeViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

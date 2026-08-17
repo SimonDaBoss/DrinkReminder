@@ -6,15 +6,21 @@ let package = Package(
     name: "DrinkReminder",
     platforms: [
         .iOS(.v17),
-        .macOS(.v13)
+        .macOS(.v14)
     ],
     products: [
-        .executable(name: "DrinkReminder", targets: ["DrinkReminder"])
+        .library(name: "DrinkReminder", targets: ["DrinkReminder"])
     ],
     targets: [
-        .executableTarget(
+        .target(
             name: "DrinkReminder",
-            path: "DrinkReminder"
+            path: "DrinkReminder",
+            exclude: [
+                "App",
+                "Features/Home/Components",
+                "Features/Home/CustomWaterSheet.swift",
+                "Features/Home/HomeView.swift"
+            ]
         ),
         .testTarget(
             name: "DrinkReminderTests",

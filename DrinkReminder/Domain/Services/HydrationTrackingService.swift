@@ -4,6 +4,7 @@ import Foundation
 enum HydrationTrackingError: LocalizedError, Equatable {
     case invalidVolume
     case invalidDailyGoal
+    case logNotFound
 
     var errorDescription: String? {
         switch self {
@@ -11,6 +12,8 @@ enum HydrationTrackingError: LocalizedError, Equatable {
             return "Water volume must be a finite amount greater than zero."
         case .invalidDailyGoal:
             return "The daily hydration goal must be greater than zero."
+        case .logNotFound:
+            return "That water entry is no longer available to undo."
         }
     }
 }
@@ -73,10 +76,63 @@ final class HydrationTrackingService {
         }
 
         return HydrationLogResult(
+            logID: log.id,
             summary: day.summary,
             loggedAmountML: volumeML,
             crossedHalfway: crossedHalfway,
             reachedGoal: reachedGoal
+        )
+    }
+
+    func undoWaterLog(id: UUID) throws -> HydrationSummary {
+        let request = NSFetchRequest<WaterLogEntity>(entityName: "WaterLogEntity")
+        request.predicate = NSPredicate(format: "id == %@", id as CVarArg)
+        request.fetchLimit = 1
+
+        guard let log = try context.fetch(request).first else {
+            throw HydrationTrackingError.logNotFound
+        }
+
+        let day = log.day
+        let remainingLogs = day.logs
+            .filter { $0.id != id && !$0.isDeleted }
+            .sorted { $0.loggedAt < $1.loggedAt }
+
+        context.delete(log)
+        day.totalML = remainingLogs.reduce(0) { $0 + $1.volumeML }
+        day.goalReachedAt = goalReachedDate(in: remainingLogs, goalML: day.goalML)
+
+        do {
+            try context.save()
+        } catch {
+            context.rollback()
+            throw error
+        }
+        return day.summary
+    }
+
+    func configuration() throws -> HydrationConfiguration {
+        let preferences = try fetchPreferences()
+        let request = NSFetchRequest<ContainerPresetEntity>(entityName: "ContainerPresetEntity")
+        request.sortDescriptors = [
+            NSSortDescriptor(key: "sortOrder", ascending: true),
+            NSSortDescriptor(key: "createdAt", ascending: true)
+        ]
+        let presets = try context.fetch(request).map {
+            ContainerPreset(
+                id: $0.id,
+                name: $0.name,
+                volumeML: $0.volumeML,
+                symbolName: $0.symbolName,
+                isDefault: $0.isDefault
+            )
+        }
+
+        return HydrationConfiguration(
+            displayUnit: preferences.displayUnit,
+            defaultDrinkAmountML: preferences.defaultDrinkAmountML,
+            hapticsEnabled: preferences.hapticsEnabled,
+            presets: presets
         )
     }
 
@@ -147,5 +203,16 @@ final class HydrationTrackingService {
             throw PersistenceError.missingPreferences
         }
         return preferences
+    }
+
+    private func goalReachedDate(in logs: [WaterLogEntity], goalML: Double) -> Date? {
+        var runningTotal = 0.0
+        for log in logs {
+            runningTotal += log.volumeML
+            if runningTotal >= goalML {
+                return log.loggedAt
+            }
+        }
+        return nil
     }
 }
