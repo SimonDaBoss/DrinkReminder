@@ -2,7 +2,9 @@ import CoreData
 import Foundation
 
 enum ManagedObjectModelFactory {
-    static func makeModel() -> NSManagedObjectModel {
+    static let model = makeModel()
+
+    private static func makeModel() -> NSManagedObjectModel {
         let userProfile = entity("UserProfileEntity", UserProfileEntity.self, attributes: [
             attribute("id", .UUIDAttributeType),
             attribute("displayName", .stringAttributeType, optional: true),

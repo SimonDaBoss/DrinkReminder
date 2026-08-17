@@ -25,7 +25,7 @@ final class PersistenceController {
     init(inMemory: Bool = false) throws {
         container = NSPersistentContainer(
             name: "DrinkReminder",
-            managedObjectModel: ManagedObjectModelFactory.makeModel()
+            managedObjectModel: ManagedObjectModelFactory.model
         )
 
         let description: NSPersistentStoreDescription
