@@ -39,10 +39,12 @@ struct HomeView: View {
                             progress: viewModel.progress,
                             mood: viewModel.petMood,
                             species: viewModel.petIdentity.species,
+                            evolutionStage: viewModel.progression.pet.evolutionStage,
                             progressPercentText: viewModel.progressPercentText
                         )
 
                         hydrationSummary
+                        ProgressionCard(progression: viewModel.progression)
                         quickAddSection
                     }
                     .padding(.horizontal, 20)
@@ -258,6 +260,12 @@ struct HomeView: View {
 
             Text("Added \(VolumeDisplayFormatter.string(milliliters: undoState.amountML, unit: viewModel.displayUnit))")
                 .font(.subheadline.weight(.semibold))
+
+            if viewModel.lastXPGain > 0 {
+                Text("+\(viewModel.lastXPGain) XP")
+                    .font(.caption.bold())
+                    .foregroundStyle(.purple)
+            }
 
             Spacer()
 

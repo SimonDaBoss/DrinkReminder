@@ -14,6 +14,11 @@ final class HomeViewModel: ObservableObject {
     @Published private(set) var defaultDrinkAmountML: Double = 0
     @Published private(set) var petMood: PetMood = .idle
     @Published private(set) var petIdentity = PetIdentity(name: "Puddle", species: .axolotl)
+    @Published private(set) var progression = ProgressionSnapshot(
+        streak: .empty,
+        pet: PetProgressionRules.progress(totalXP: 0)
+    )
+    @Published private(set) var lastXPGain = 0
     @Published private(set) var undoState: UndoState?
     @Published var errorMessage: String?
 
@@ -21,6 +26,7 @@ final class HomeViewModel: ObservableObject {
     private let haptics: any HapticProviding
     private weak var reminderRefresher: (any HydrationReminderRefreshing)?
     private weak var petProfileProvider: (any PetProfileProviding)?
+    private let progressionService: PetProgressionService?
     private var hapticsEnabled = true
     private var reactionTask: Task<Void, Never>?
     private var undoDismissTask: Task<Void, Never>?
@@ -29,12 +35,14 @@ final class HomeViewModel: ObservableObject {
         hydrationTracker: HydrationTrackingService,
         haptics: any HapticProviding,
         reminderRefresher: (any HydrationReminderRefreshing)? = nil,
-        petProfileProvider: (any PetProfileProviding)? = nil
+        petProfileProvider: (any PetProfileProviding)? = nil,
+        progressionService: PetProgressionService? = nil
     ) {
         self.hydrationTracker = hydrationTracker
         self.haptics = haptics
         self.reminderRefresher = reminderRefresher
         self.petProfileProvider = petProfileProvider
+        self.progressionService = progressionService
     }
 
     convenience init(hydrationTracker: HydrationTrackingService) {
@@ -77,7 +85,7 @@ final class HomeViewModel: ObservableObject {
     var encouragementText: String {
         guard let summary else { return "Getting today ready…" }
         if summary.isGoalReached {
-            return "Daily goal complete!"
+            return "Goal complete — \(petIdentity.name) is happy!"
         }
 
         let remaining = max(summary.goalML - summary.totalML, 0)
@@ -101,6 +109,9 @@ final class HomeViewModel: ObservableObject {
             presets = configuration.presets
             if let petProfileProvider {
                 petIdentity = try petProfileProvider.petIdentity()
+            }
+            if let progressionService {
+                progression = try progressionService.snapshot()
             }
             summary = try hydrationTracker.todaySummary()
             petMood = restingMood
@@ -138,7 +149,11 @@ final class HomeViewModel: ObservableObject {
 
         do {
             summary = try hydrationTracker.undoWaterLog(id: undoState.logID)
+            if let progressionService {
+                progression = try progressionService.reconcileAfterUndo()
+            }
             self.undoState = nil
+            lastXPGain = 0
             undoDismissTask?.cancel()
             petMood = restingMood
             if hapticsEnabled {
@@ -168,6 +183,11 @@ final class HomeViewModel: ObservableObject {
                 presetID: presetID
             )
             summary = result.summary
+            if let progressionService {
+                let update = try progressionService.record(result)
+                progression = update.snapshot
+                lastXPGain = update.earnedXP
+            }
             undoState = UndoState(logID: result.logID, amountML: result.loggedAmountML)
             if hapticsEnabled {
                 haptics.waterLogged(reachedGoal: result.reachedGoal)

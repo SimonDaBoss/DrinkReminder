@@ -3,19 +3,22 @@ import SwiftUI
 struct PetCharacterView: View {
     let mood: PetMood
     var species: PetSpecies = .axolotl
+    var evolutionStage: EvolutionStage = .baby
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var isFloating = false
 
     var body: some View {
         ZStack {
-            if mood == .celebrating {
+            if mood == .celebrating || mood == .happy {
                 celebrationDrops
+                    .opacity(mood == .happy ? 0.72 : 1)
                     .transition(.scale.combined(with: .opacity))
             }
 
             headDetails
             bodyShape
+            stageAccent
 
             if mood == .drinking {
                 Image(systemName: "drop.fill")
@@ -27,7 +30,7 @@ struct PetCharacterView: View {
         }
         .frame(width: 170, height: 150)
         .offset(y: reduceMotion ? 0 : (isFloating ? -4 : 4))
-        .scaleEffect(mood == .celebrating ? 1.08 : 1)
+        .scaleEffect((mood == .celebrating ? 1.08 : 1) * stageScale)
         .animation(
             reduceMotion ? nil : .spring(response: 0.35, dampingFraction: 0.58),
             value: mood
@@ -76,12 +79,13 @@ struct PetCharacterView: View {
     }
 
     private var eye: some View {
-        ZStack(alignment: .topLeading) {
+        let isJoyful = mood == .happy || mood == .celebrating
+        return ZStack(alignment: .topLeading) {
             Circle()
                 .fill(Color(red: 0.08, green: 0.17, blue: 0.28))
-                .frame(width: 17, height: mood == .happy || mood == .celebrating ? 7 : 20)
+                .frame(width: 17, height: isJoyful ? 7 : 20)
 
-            if mood != .happy && mood != .celebrating {
+            if !isJoyful {
                 Circle()
                     .fill(.white.opacity(0.9))
                     .frame(width: 6, height: 6)
@@ -90,13 +94,28 @@ struct PetCharacterView: View {
         }
     }
 
+    @ViewBuilder
     private var mouth: some View {
-        Capsule()
-            .fill(Color(red: 0.08, green: 0.17, blue: 0.28))
-            .frame(
-                width: mood == .celebrating ? 24 : 30,
-                height: mood == .celebrating ? 22 : 6
-            )
+        if mood == .celebrating {
+            Ellipse()
+                .fill(Color(red: 0.08, green: 0.17, blue: 0.28))
+                .frame(width: 24, height: 22)
+        } else if mood == .happy || mood == .excited {
+            PetSmileShape()
+                .stroke(
+                    Color(red: 0.08, green: 0.17, blue: 0.28),
+                    style: StrokeStyle(lineWidth: 6, lineCap: .round)
+                )
+                .frame(width: 32, height: 17)
+        } else if mood == .drinking {
+            Circle()
+                .fill(Color(red: 0.08, green: 0.17, blue: 0.28))
+                .frame(width: 10, height: 10)
+        } else {
+            Capsule()
+                .fill(Color(red: 0.08, green: 0.17, blue: 0.28))
+                .frame(width: 30, height: 6)
+        }
     }
 
     private var gills: some View {
@@ -139,6 +158,36 @@ struct PetCharacterView: View {
         }
     }
 
+    @ViewBuilder
+    private var stageAccent: some View {
+        switch evolutionStage {
+        case .baby:
+            EmptyView()
+        case .growing:
+            Image(systemName: "leaf.fill")
+                .foregroundStyle(.green)
+                .offset(x: 42, y: -49)
+        case .evolved:
+            Image(systemName: "star.fill")
+                .foregroundStyle(.yellow)
+                .offset(x: 44, y: -51)
+        case .advanced:
+            Image(systemName: "crown.fill")
+                .font(.title2)
+                .foregroundStyle(.yellow)
+                .offset(y: -67)
+        }
+    }
+
+    private var stageScale: CGFloat {
+        switch evolutionStage {
+        case .baby: return 0.94
+        case .growing: return 0.98
+        case .evolved: return 1.02
+        case .advanced: return 1.05
+        }
+    }
+
     private var gillCluster: some View {
         VStack(spacing: -3) {
             Capsule().frame(width: 43, height: 13).rotationEffect(.degrees(-24))
@@ -157,5 +206,17 @@ struct PetCharacterView: View {
         }
         .font(.title3)
         .foregroundStyle(.yellow)
+    }
+}
+
+private struct PetSmileShape: Shape {
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        path.move(to: CGPoint(x: rect.minX, y: rect.minY))
+        path.addQuadCurve(
+            to: CGPoint(x: rect.maxX, y: rect.minY),
+            control: CGPoint(x: rect.midX, y: rect.maxY)
+        )
+        return path
     }
 }

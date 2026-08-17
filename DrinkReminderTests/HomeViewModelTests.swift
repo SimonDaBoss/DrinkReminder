@@ -60,7 +60,10 @@ final class HomeViewModelTests: XCTestCase {
 
         XCTAssertEqual(viewModel.petMood, .celebrating)
         XCTAssertEqual(haptics.waterLoggedGoalValues, [true])
-        XCTAssertEqual(viewModel.encouragementText, "Daily goal complete!")
+        XCTAssertEqual(viewModel.encouragementText, "Goal complete — Puddle is happy!")
+
+        viewModel.load()
+        XCTAssertEqual(viewModel.petMood, .happy)
     }
 
     @MainActor

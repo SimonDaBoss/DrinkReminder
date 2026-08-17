@@ -62,6 +62,13 @@
 		100000000000000000000036 /* PrivacyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000038 /* PrivacyView.swift */; };
 		100000000000000000000037 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000039 /* MainTabView.swift */; };
 		100000000000000000000038 /* AppSettingsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20000000000000000000003A /* AppSettingsServiceTests.swift */; };
+		100000000000000000000039 /* ProgressionTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20000000000000000000003B /* ProgressionTypes.swift */; };
+		10000000000000000000003A /* StreakCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20000000000000000000003C /* StreakCalculator.swift */; };
+		10000000000000000000003B /* PetProgressionRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20000000000000000000003D /* PetProgressionRules.swift */; };
+		10000000000000000000003C /* PetProgressionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20000000000000000000003E /* PetProgressionService.swift */; };
+		10000000000000000000003D /* ProgressionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20000000000000000000003F /* ProgressionCard.swift */; };
+		10000000000000000000003E /* StreakCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000040 /* StreakCalculatorTests.swift */; };
+		10000000000000000000003F /* PetProgressionServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000041 /* PetProgressionServiceTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -133,6 +140,13 @@
 		200000000000000000000038 /* PrivacyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminder/Features/Settings/PrivacyView.swift; sourceTree = SOURCE_ROOT; };
 		200000000000000000000039 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminder/App/MainTabView.swift; sourceTree = SOURCE_ROOT; };
 		20000000000000000000003A /* AppSettingsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminderTests/AppSettingsServiceTests.swift; sourceTree = SOURCE_ROOT; };
+		20000000000000000000003B /* ProgressionTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminder/Domain/Models/ProgressionTypes.swift; sourceTree = SOURCE_ROOT; };
+		20000000000000000000003C /* StreakCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminder/Domain/Rules/StreakCalculator.swift; sourceTree = SOURCE_ROOT; };
+		20000000000000000000003D /* PetProgressionRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminder/Domain/Rules/PetProgressionRules.swift; sourceTree = SOURCE_ROOT; };
+		20000000000000000000003E /* PetProgressionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminder/Domain/Services/PetProgressionService.swift; sourceTree = SOURCE_ROOT; };
+		20000000000000000000003F /* ProgressionCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminder/Features/Home/Components/ProgressionCard.swift; sourceTree = SOURCE_ROOT; };
+		200000000000000000000040 /* StreakCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminderTests/StreakCalculatorTests.swift; sourceTree = SOURCE_ROOT; };
+		200000000000000000000041 /* PetProgressionServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkReminderTests/PetProgressionServiceTests.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,6 +216,11 @@
 				200000000000000000000037 /* PresetEditorView.swift */,
 				200000000000000000000038 /* PrivacyView.swift */,
 				200000000000000000000039 /* MainTabView.swift */,
+				20000000000000000000003B /* ProgressionTypes.swift */,
+				20000000000000000000003C /* StreakCalculator.swift */,
+				20000000000000000000003D /* PetProgressionRules.swift */,
+				20000000000000000000003E /* PetProgressionService.swift */,
+				20000000000000000000003F /* ProgressionCard.swift */,
 			);
 			name = DrinkReminder;
 			sourceTree = "<group>";
@@ -216,6 +235,8 @@
 				20000000000000000000002E /* ReminderDateGeneratorTests.swift */,
 				20000000000000000000002F /* ReminderManagerTests.swift */,
 				20000000000000000000003A /* AppSettingsServiceTests.swift */,
+				200000000000000000000040 /* StreakCalculatorTests.swift */,
+				200000000000000000000041 /* PetProgressionServiceTests.swift */,
 			);
 			name = DrinkReminderTests;
 			sourceTree = "<group>";
@@ -348,6 +369,11 @@
 				100000000000000000000035 /* PresetEditorView.swift in Sources */,
 				100000000000000000000036 /* PrivacyView.swift in Sources */,
 				100000000000000000000037 /* MainTabView.swift in Sources */,
+				100000000000000000000039 /* ProgressionTypes.swift in Sources */,
+				10000000000000000000003A /* StreakCalculator.swift in Sources */,
+				10000000000000000000003B /* PetProgressionRules.swift in Sources */,
+				10000000000000000000003C /* PetProgressionService.swift in Sources */,
+				10000000000000000000003D /* ProgressionCard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,6 +388,8 @@
 				10000000000000000000002C /* ReminderDateGeneratorTests.swift in Sources */,
 				10000000000000000000002D /* ReminderManagerTests.swift in Sources */,
 				100000000000000000000038 /* AppSettingsServiceTests.swift in Sources */,
+				10000000000000000000003E /* StreakCalculatorTests.swift in Sources */,
+				10000000000000000000003F /* PetProgressionServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

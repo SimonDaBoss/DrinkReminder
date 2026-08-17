@@ -7,6 +7,7 @@ final class AppEnvironment: ObservableObject {
         let persistence: PersistenceController
         let hydrationTracker: HydrationTrackingService
         let settingsService: AppSettingsService
+        let progressionService: PetProgressionService
         let reminderManager: ReminderManager
         let homeViewModel: HomeViewModel
         let reminderViewModel: ReminderViewModel
@@ -18,6 +19,7 @@ final class AppEnvironment: ObservableObject {
     let persistence: PersistenceController
     let hydrationTracker: HydrationTrackingService
     let settingsService: AppSettingsService
+    let progressionService: PetProgressionService
     let reminderManager: ReminderManager
     let homeViewModel: HomeViewModel
     let reminderViewModel: ReminderViewModel
@@ -45,6 +47,7 @@ final class AppEnvironment: ObservableObject {
         self.persistence = dependencies.persistence
         self.hydrationTracker = dependencies.hydrationTracker
         self.settingsService = dependencies.settingsService
+        self.progressionService = dependencies.progressionService
         self.reminderManager = dependencies.reminderManager
         self.homeViewModel = dependencies.homeViewModel
         self.reminderViewModel = dependencies.reminderViewModel
@@ -82,10 +85,11 @@ final class AppEnvironment: ObservableObject {
             switch identifier {
             case NotificationConstants.Action.drank:
                 let configuration = try hydrationTracker.configuration()
-                _ = try hydrationTracker.logWater(
+                let result = try hydrationTracker.logWater(
                     volumeML: configuration.defaultDrinkAmountML,
                     source: .notification
                 )
+                _ = try progressionService.record(result)
                 homeViewModel.load()
                 try await reminderManager.refreshSchedule()
 
@@ -112,6 +116,7 @@ final class AppEnvironment: ObservableObject {
             hydrationTracker: hydrationTracker
         )
         let snapshot = try settingsService.snapshot()
+        let progressionService = PetProgressionService(context: persistence.viewContext)
         let reminderManager = ReminderManager(
             context: persistence.viewContext,
             hydrationTracker: hydrationTracker
@@ -120,13 +125,15 @@ final class AppEnvironment: ObservableObject {
             hydrationTracker: hydrationTracker,
             haptics: HapticClient(),
             reminderRefresher: reminderManager,
-            petProfileProvider: settingsService
+            petProfileProvider: settingsService,
+            progressionService: progressionService
         )
 
         return Dependencies(
             persistence: persistence,
             hydrationTracker: hydrationTracker,
             settingsService: settingsService,
+            progressionService: progressionService,
             reminderManager: reminderManager,
             homeViewModel: homeViewModel,
             reminderViewModel: ReminderViewModel(manager: reminderManager),
